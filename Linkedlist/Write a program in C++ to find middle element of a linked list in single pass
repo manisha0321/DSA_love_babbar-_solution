@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+struct node {
+  int data;
+  struct node *next;
+};
+
+void createList(struct node **head, int data) {
+  struct node *newNode = (struct node *)malloc(sizeof(struct node));
+  newNode->data = data;
+  newNode->next = NULL;
+
+  if (*head == NULL) {
+    *head = newNode;
+  } else {
+    struct node *temp = *head;
+    while (temp->next != NULL) {
+      temp = temp->next;
+    }
+    temp->next = newNode;
+  }
+}
+
+void displayList(struct node *head) {
+  struct node *temp = head;
+  while (temp != NULL) {
+    printf("%d ", temp->data);
+    temp = temp->next;
+  }
+  printf("\n");
+}
+
+int main() {
+  struct node *head = NULL;
+
+  createList(&head, 10);
+  createList(&head, 20);
+  createList(&head, 30); 
+  createList(&head, 40); 
+  createList(&head, 50); 
+  createList(&head, 60);
+  createList(&head, 70);
+  struct node *slow, *fast;
+  fast=head;
+  slow=head;
+  while (fast != NULL && fast->next != NULL) {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+  cout<<"The middle element is "<<slow->data<<endl;
+  return 0;
+}
