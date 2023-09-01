@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+struct node {
+  int data;
+  struct node *next;
+};
+void createList(struct node **head, int data) {
+  struct node *newNode = (struct node *)malloc(sizeof(struct node));
+  newNode->data = data;
+  newNode->next = NULL;
+
+  if (*head == NULL) {
+    *head = newNode;
+  } else {
+    struct node *temp = *head;
+    while (temp->next != NULL) {
+      temp = temp->next;
+    }
+    temp->next = newNode;
+  }
+}
+void displayList(struct node *head) {
+  struct node *temp = head;
+  while (temp != NULL) {
+    printf("%d ", temp->data);
+    temp = temp->next;
+  }
+  printf("\n");
+}
+
+struct node *mergeLists(struct node *head1, struct node *head2) {
+  struct node *dummy = new(struct node);
+  struct node *tail = dummy;
+
+  while (head1 != NULL && head2 != NULL) {
+    if (head1->data <= head2->data) {
+      tail->next = head1;
+      head1 = head1->next;
+    } else {
+      tail->next = head2;
+      head2 = head2->next;
+    }
+    tail = tail->next;
+  }
+
+  if (head1 != NULL) {
+    tail->next = head1;
+  } else {
+    tail->next = head2;
+  }
+
+  return dummy->next;
+}
+
+int main() {
+  struct node *head1 = NULL;
+  struct node *head2 = NULL;
+
+  createList(&head1, 8);
+  createList(&head1, 10);
+  createList(&head1, 15);
+
+  createList(&head2, 5);
+  createList(&head2, 7);
+  createList(&head2, 9);
+
+  struct node *mergedList = mergeLists(head1, head2);
+
+  displayList(mergedList);
+
+  return 0;
+}
