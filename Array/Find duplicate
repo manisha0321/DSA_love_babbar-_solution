@@ -1,0 +1,11 @@
+int findDuplicate(vector<int> &arr) 
+{
+    // Write your code here
+	int n = arr.size();
+    int sum = 0;
+    for(int i = 0;i<n;i++){
+        sum += arr[i];
+    }
+    int a = n*(n-1);
+    return sum - (a/2);
+}
