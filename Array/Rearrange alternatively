@@ -1,0 +1,32 @@
+#include <bits/stdc++.h> 
+
+void rearrange(vector<int> &arr)
+{
+	int n=arr.size();
+	int positive[n], negative[n];
+    int pos_count = 0, neg_count = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] >= 0) {
+            positive[pos_count++] = arr[i];
+        } else {
+            negative[neg_count++] = arr[i];
+        }
+    }
+
+    int i = 0, j = 0, k = 0;
+	// Merge positive and negative numbers alternately
+    while (i < pos_count && j < neg_count) {
+        arr[k++] = positive[i++];
+        arr[k++] = negative[j++];
+    }
+
+    // If there are any remaining positive numbers, append them
+    while (i < pos_count) {
+        arr[k++] = positive[i++];
+    }
+
+    // If there are any remaining negative numbers, append them
+    while (j < neg_count) {
+        arr[k++] = negative[j++];
+    }
+}
