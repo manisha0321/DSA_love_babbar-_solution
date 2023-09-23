@@ -1,0 +1,29 @@
+Node *removeLoop(Node *head)
+{
+    // Write your code here.
+    if (head == NULL || head->next == NULL)
+    return head;
+    Node *slow=head;
+    Node *fast=head;
+    while(fast!=NULL&&fast->next!=NULL)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+        if (slow == fast)
+        {
+            Node *curr=head;
+            while(slow!=curr)
+            {
+                curr=curr->next;
+                slow=slow->next;
+            }
+            while(slow->next!=curr)
+            {
+                slow=slow->next;
+            }
+            slow->next=NULL;
+            return head;
+        }
+    }
+    return head;
+}
