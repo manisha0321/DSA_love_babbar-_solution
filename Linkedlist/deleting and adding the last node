@@ -1,0 +1,23 @@
+Node *delAddLastNode(Node *head){
+	// Write your code here.
+    if (head == NULL) {
+        return NULL;
+    }
+    if (head->next == NULL) {
+        return head;
+    }
+    Node*temp=head;
+    Node*prev=NULL;
+    int val;
+    while(temp->next!=NULL)
+    {
+        prev=temp;
+        temp=temp->next;
+    }
+    val=temp->data;
+    prev->next=NULL;
+    Node* newnode = new Node(val);
+    newnode->next=head;
+    head=newnode;
+    return newnode;
+}
