@@ -1,0 +1,17 @@
+bool isPalindrome(LinkedListNode<int> *head) {
+    // Write your code here.
+    if(!head)return true;
+    stack<int>st;
+    LinkedListNode<int>*temp = head;
+    while(temp){
+        st.push(temp->data);
+        temp=temp->next;
+    }
+    temp = head;
+    while(temp){
+        if(st.top()!=temp->data)return false;
+        temp = temp->next;
+        st.pop();
+    }
+    return true;
+}
