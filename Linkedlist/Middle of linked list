@@ -1,0 +1,33 @@
+
+Node *findMiddle(Node *head) {
+    // Write your code here
+       if (!head) {
+        return nullptr;
+    }
+ 
+    int count = 1;
+    Node* p = head;
+ 
+    while(p->next) {
+        p = p->next; // Move two stepsṇ
+        count++;
+    }
+ 
+    int first = 1;
+    int last = count;
+    int avg = (first + last )/2;
+ 
+    if(count%2 == 0){
+        avg = avg+1;
+    }
+ 
+    int i=1;
+    Node* q = head;
+ 
+    while(i<avg){
+        q=q->next;
+        i++;
+    }
+    head = q;
+    return head;
+}
