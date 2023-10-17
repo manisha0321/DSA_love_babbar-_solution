@@ -1,0 +1,17 @@
+        if (N == 1) {
+            // Base case: move the single disk from the source rod to the destination rod
+            std::cout << "move disk 1 from rod " << from << " to rod " << to << std::endl;
+            return 1; // One move is performed
+        } else {
+            // Recursive case
+            // Move N-1 disks from the source rod to the auxiliary rod
+            long long moves = toh(N - 1, from, aux, to);
+
+            // Move the Nth disk from the source rod to the destination rod
+            std::cout << "move disk " << N << " from rod " << from << " to rod " << to << std::endl;
+
+            // Move the N-1 disks from the auxiliary rod to the destination rod
+            moves += toh(N - 1, aux, to, from);
+
+            return moves + 1; // Total moves for this step
+        }
